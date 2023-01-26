@@ -5,11 +5,9 @@ DEFINE_MUTEX(lock);
 ssize_t write_response(char __user *user_buff, size_t user_buffer_length, loff_t *offset){
     ssize_t ret = buffer_size;
  
-    if (*offset >= buffer_size || copy_to_user(user_buff, buffer, buffer_size)) {
-            pr_info("copy_to_user failed\n");
+    if (*offset >= buffer_size || copy_to_user(user_buff, buffer, buffer_size)) {           
             ret = 0;
-    } else {
-            pr_info("procfile read %s\n");
+    } else {         
             *offset += buffer_size;
     }
     mutex_unlock(&lock);
