@@ -47,14 +47,14 @@ ssize_t get_dentry(char __user *user_buff, size_t user_buffer_length, loff_t *of
   if(my_path == NULL){
     pr_err("Fail to get path");
     mutex_unlock(&lock);
-    return(-EFAULT);
+    return -EFAULT;
   }
   int status = kern_path(user_path, LOOKUP_FOLLOW, my_path);
   if (status){
         pr_err("My_module: Cant find file from user path");
         kfree(my_path);
         mutex_unlock(&lock);
-      return(-EFAULT);
+      return -EFAULT;
   }
  
   buffer_size = sprintf(buffer, "The dentry structure was obtained successfully!\n{\n\
@@ -75,7 +75,7 @@ ssize_t file_read(struct file *filePointer, char __user *user_buff,
   if (struct_num == NULL){
       pr_err("My_module: No input data, please enter them");
       mutex_unlock(&lock);
-      return(-EFAULT);
+      return -EFAULT;
   }
  
   if (struct_num == THREAD_STRUCT ){
@@ -107,10 +107,6 @@ ssize_t file_write(struct file *file, const char __user *user_buff,
       if (struct_num == DENTRY){
         count_of_args = sscanf(buffer, "%d %s", &struct_num, &user_path);
       }
-   
-          // pr_info("pid %d\n", pid);
-          // pr_info("struct num %d\n", struct_num);
-      // pr_info("user path %s\n", user_path);
    
       return buffer_size;
     }
