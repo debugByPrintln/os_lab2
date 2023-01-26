@@ -23,7 +23,6 @@ ssize_t get_thread_struct(char __user *user_buff, size_t user_buffer_length, lof
     return -EFAULT;
   }
  
-  pr_info("local2\n");
   pr_info("%lu\n", task->thread.fsbase);
   pr_info("%lu\n", task->thread.sp);
   pr_info("%lu\n", task->thread.gsbase);
