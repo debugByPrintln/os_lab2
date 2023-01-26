@@ -23,6 +23,8 @@ int main(){
   }
 
   iter = system(buffer);
-
-  return 0;
+  
+  int r = system("cat /proc/request");
+  
+  return r;
 }
